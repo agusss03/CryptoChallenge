@@ -106,5 +106,3 @@ const styles = StyleSheet.create({
 });
 
 export default Item;
-
-//<Image source={crypto.status > 0 ? increaseArrow : decreaseArrow} />
