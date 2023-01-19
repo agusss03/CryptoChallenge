@@ -19,7 +19,7 @@ const cryptos = [
   },
   {
     id: '2',
-    logo: require('./src/components/images/flecha/ethereum.png'),
+    logo: require('./src/components/images/flecha/et.png'),
     name: 'Ethereum',
     abr: 'ETH',
     price: 146.83,
