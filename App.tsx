@@ -5,22 +5,24 @@ import List from './src/components/List';
 const App = () => {
   return (
     <>
-      <SafeAreaView style={styles.container}>
-        <View>
-          <Text style={styles.textoCrypto}> CryptoTracker Pro </Text>
+      <SafeAreaView>
+        <View style={styles.container}>
+          <View>
+            <Text style={styles.textoCrypto}> CryptoTracker Pro </Text>
+          </View>
+          <Image
+            source={require('./assets/images/cara.jpg')}
+            style={styles.imagen}
+          />
         </View>
-        <Image
-          source={require('./assets/images/cara.jpg')}
-          style={styles.imagen}
-        />
+        <View style={styles.espacio} />
+        <View>
+          <List />
+        </View>
+        <View>
+          <Text style={styles.btnAddCrypto}> + Add a Cryptocurrency</Text>
+        </View>
       </SafeAreaView>
-      <View style={styles.espacio} />
-      <View>
-        <List />
-      </View>
-      <View>
-        <Text style={styles.btnAddCrypto}> + Add a Cryptocurrency</Text>
-      </View>
     </>
   );
 };
@@ -33,14 +35,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.22,
-    shadowRadius: 2.22,
-
-    elevation: 3,
   },
   textoCrypto: {
     color: '#FFF',
