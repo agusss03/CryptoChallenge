@@ -12,7 +12,8 @@
   "dependencies": {
     "react": "18.2.0",
     "react-native": "0.71.0",
-    "react-native-format-currency": "^0.0.3"
+    "react-native-format-currency": "^0.0.3",
+    "styled-components": "^5.3.6"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
@@ -23,6 +24,7 @@
     "@types/jest": "^29.2.1",
     "@types/react": "^18.0.24",
     "@types/react-test-renderer": "^18.0.0",
+    "@types/styled-components": "^5.1.26",
     "babel-jest": "^29.2.1",
     "eslint": "^8.19.0",
     "file-loader": "^6.2.0",

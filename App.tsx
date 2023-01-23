@@ -1,17 +1,12 @@
 import React from 'react';
-import {
-  Image,
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  View,
-  FlatList,
-} from 'react-native';
-import Item from './Cryptos';
+import {SafeAreaView, View, FlatList, TouchableOpacity} from 'react-native';
+import Crypto from './src/components/Crypto';
+import {Container, Title, ImageApp, Space, BTNAddCrypto} from './styles';
+
 const cryptos = [
   {
     id: '1',
-    logo: require('./src/components/images/flecha/bitcoin.jpg'),
+    logo: require('./src/assets/images/bitcoin.jpg'),
     name: 'Bitcoin',
     abr: 'BTC',
     price: 7215.68,
@@ -19,7 +14,7 @@ const cryptos = [
   },
   {
     id: '2',
-    logo: require('./src/components/images/flecha/et.png'),
+    logo: require('./src/assets/images/et.png'),
     name: 'Ethereum',
     abr: 'ETH',
     price: 146.83,
@@ -27,7 +22,7 @@ const cryptos = [
   },
   {
     id: '3',
-    logo: require('./src/components/images/flecha/xrp.png'),
+    logo: require('./src/assets/images/xrp.png'),
     name: 'XRP',
     abr: 'XRP',
     price: 0.220568,
@@ -35,63 +30,30 @@ const cryptos = [
   },
 ];
 
-const App = () => {
-  return (
-    <>
-      <SafeAreaView>
-        <View style={styles.container}>
-          <View>
-            <Text style={styles.textoCrypto}> CryptoTracker Pro </Text>
-          </View>
-          <Image
-            source={require('./assets/images/cara.jpg')}
-            style={styles.imagen}
+const App = () => (
+  <>
+    <SafeAreaView>
+      <Container>
+        <View>
+          <Title> CryptoTracker Pro </Title>
+        </View>
+        <ImageApp source={require('./src/assets/images/cara.jpg')} />
+      </Container>
+      <Space />
+      <View>
+        <View>
+          <FlatList
+            data={cryptos}
+            keyExtractor={({id}) => id}
+            renderItem={({item}) => <Crypto crypto={item} />}
           />
         </View>
-        <View style={styles.espacio} />
-        <View>
-          <View>
-            <FlatList
-              data={cryptos}
-              keyExtractor={item => item.id}
-              renderItem={({item}) => <Item crypto={item} />}
-            />
-          </View>
-          <Text style={styles.btnAddCrypto}> + Add a Cryptocurrency</Text>
-        </View>
-      </SafeAreaView>
-    </>
-  );
-};
-
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#385775',
-    padding: 20,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    shadowColor: '#000',
-  },
-  textoCrypto: {
-    color: '#FFF',
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  imagen: {
-    width: 50,
-    height: 50,
-    borderRadius: 50,
-  },
-  espacio: {
-    marginTop: 15,
-  },
-  btnAddCrypto: {
-    textAlign: 'center',
-    marginTop: 50,
-    fontSize: 15,
-    color: '#385775',
-  },
-});
+        <TouchableOpacity>
+          <BTNAddCrypto> + Add a Cryptocurrency </BTNAddCrypto>
+        </TouchableOpacity>
+      </View>
+    </SafeAreaView>
+  </>
+);
 
 export default App;
