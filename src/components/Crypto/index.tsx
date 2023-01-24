@@ -14,6 +14,7 @@ import {
   TitleView,
   ProfitNumber,
 } from './styles';
+
 type ItemProps = {
   crypto: {
     id: string;

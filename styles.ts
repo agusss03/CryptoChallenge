@@ -10,19 +10,23 @@ export const Container = styled(View)`
   align-items: center;
   shadow-color: ${theme.colors.white};
 `;
+
 export const Title = styled(Text)`
   color: ${theme.colors.black};
   font-size: 20px;
   font-weight: bold;
 `;
+
 export const ImageApp = styled(Image)`
   width: 50px;
   height: 50px;
   border-radius: 50px;
 `;
+
 export const Space = styled(View)`
   margin-top: 15px;
 `;
+
 export const BTNAddCrypto = styled(Text)`
   text-align: center;
   margin-top: 50px;
