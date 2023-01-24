@@ -43,8 +43,8 @@ const Crypto = ({crypto}: ItemProps) => (
           <Arrow
             source={
               crypto.status > 0
-                ? require('../../assets/images/arrows/FlechaVerde.png')
-                : require('../../assets/images/arrows/FlechaRoja.png')
+                ? require('../../assets/images/arrows/GreenArrow.png')
+                : require('../../assets/images/arrows/RedArrow.png')
             }
           />
           <ProfitNumber positive={crypto.status > 0}>

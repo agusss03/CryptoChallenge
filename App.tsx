@@ -37,7 +37,7 @@ const App = () => (
         <View>
           <Title> CryptoTracker Pro </Title>
         </View>
-        <ImageApp source={require('./src/assets/images/cara.jpg')} />
+        <ImageApp source={require('./src/assets/images/Face.jpg')} />
       </Container>
       <Space />
       <View>
