@@ -1,5 +1,6 @@
 import React from 'react';
 import {Text} from 'react-native';
+import {CryptoType} from '../../types/crypto';
 
 import {
   Left,
@@ -15,21 +16,11 @@ import {
   ProfitNumber,
 } from './styles';
 
-type ItemProps = {
-  crypto: {
-    id: string;
-    name: string;
-    symbol: string;
-    metrics: {
-      market_data: {
-        percent_change_usd_last_24_hours: number;
-        price_usd: number;
-      };
-    };
-  };
-};
+interface Props {
+  crypto: CryptoType;
+}
 
-const Crypto = ({crypto}: ItemProps) => (
+const Crypto = ({crypto}: Props) => (
   <>
     <Wrapper>
       <Left>
