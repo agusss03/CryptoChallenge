@@ -26,7 +26,7 @@ export const TitleView = styled(View)`
 `;
 
 export const Name = styled(Text)`
-  color: ${theme.colors.white};
+  color: ${theme.colors.black};
   font-size: 16px;
   font-weight: 600;
 `;
@@ -38,7 +38,7 @@ export const Right = styled(View)`
 export const Value = styled(Text)`
   font-weight: 600;
   font-size: 15px;
-  color: ${theme.colors.white};
+  color: ${theme.colors.black};
 `;
 
 export const Status = styled(View)`

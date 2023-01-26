@@ -36,21 +36,21 @@ const Crypto = ({crypto}: Props) => (
       </Left>
 
       <Right>
-        <Value>${crypto.metrics.market_data.price_usd.toFixed(2)}</Value>
+        <Value>${crypto?.market_data?.price_usd?.toFixed(2)}</Value>
         <Status>
           <Arrow
             source={
-              crypto.metrics.market_data.percent_change_usd_last_24_hours > 0
+              crypto?.market_data?.percent_change_usd_last_24_hours > 0
                 ? require('../../assets/images/arrows/GreenArrow.png')
                 : require('../../assets/images/arrows/RedArrow.png')
             }
           />
           <ProfitNumber
             positive={
-              crypto.metrics.market_data.percent_change_usd_last_24_hours > 0
+              crypto?.market_data?.percent_change_usd_last_24_hours > 0
             }>
             {Math.abs(
-              crypto.metrics.market_data.percent_change_usd_last_24_hours,
+              crypto?.market_data?.percent_change_usd_last_24_hours,
             ).toFixed(2)}
             %
           </ProfitNumber>
