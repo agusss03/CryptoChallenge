@@ -1,5 +1,6 @@
 import React from 'react';
-import {Text, ImageSourcePropType} from 'react-native';
+import {Text} from 'react-native';
+import {CryptoType} from '../../types/crypto';
 
 import {
   Left,
@@ -15,40 +16,43 @@ import {
   ProfitNumber,
 } from './styles';
 
-type ItemProps = {
-  crypto: {
-    id: string;
-    name: string;
-    abr: string;
-    price: number;
-    logo: ImageSourcePropType;
-    status: number;
-  };
-};
+interface Props {
+  crypto: CryptoType;
+}
 
-const Crypto = ({crypto}: ItemProps) => (
+const Crypto = ({crypto}: Props) => (
   <>
     <Wrapper>
       <Left>
-        <Logo source={crypto.logo} />
+        <Logo
+          source={{
+            uri: `https://messari.io/asset-images/${crypto.id}/128.png`,
+          }}
+        />
         <TitleView>
           <Name>{crypto.name}</Name>
-          <Text>{crypto.abr}</Text>
+          <Text>{crypto.symbol}</Text>
         </TitleView>
       </Left>
 
       <Right>
-        <Value>${crypto.price}</Value>
+        <Value>${crypto.metrics.market_data.price_usd.toFixed(2)}</Value>
         <Status>
           <Arrow
             source={
-              crypto.status > 0
+              crypto.metrics.market_data.percent_change_usd_last_24_hours > 0
                 ? require('../../assets/images/arrows/GreenArrow.png')
                 : require('../../assets/images/arrows/RedArrow.png')
             }
           />
-          <ProfitNumber positive={crypto.status > 0}>
-            {Math.abs(crypto.status)}%
+          <ProfitNumber
+            positive={
+              crypto.metrics.market_data.percent_change_usd_last_24_hours > 0
+            }>
+            {Math.abs(
+              crypto.metrics.market_data.percent_change_usd_last_24_hours,
+            ).toFixed(2)}
+            %
           </ProfitNumber>
         </Status>
       </Right>
