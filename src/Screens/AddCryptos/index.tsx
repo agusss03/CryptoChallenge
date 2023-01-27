@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {Pressable, SafeAreaView} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {Alert, Pressable, SafeAreaView} from 'react-native';
 import {
   AddContainer,
   AddCrypto,
@@ -11,7 +11,8 @@ import {
 } from './styles';
 import {fetchCrypto} from '../../store/actions/cryptos';
 import {AppDispatch} from '../../store/index';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
+import {clearError} from '../../store/cryptoSlice';
 
 interface Props {
   navigation: any;
@@ -21,11 +22,23 @@ const AddCryptos = ({navigation}: Props) => {
   const [addCrypto, setAddCrypto] = useState('');
   const [isFocused, setIsFocused] = useState(false);
   const dispatch = useDispatch<AppDispatch>();
+  const cryptosState: any = useSelector(state => state);
 
   const onAdd = async () => {
     await dispatch(fetchCrypto(addCrypto));
     navigation.goBack();
   };
+  useEffect(() => {
+    if (cryptosState.crypto.error !== null) {
+      Alert.alert('Error', cryptosState.crypto.error, [
+        {
+          text: 'Ok',
+          onPress: () => dispatch(clearError()),
+        },
+      ]);
+    }
+  }, [cryptosState.crypto.error, dispatch]);
+
   return (
     <SafeAreaView>
       <BtnView>
@@ -46,7 +59,9 @@ const AddCryptos = ({navigation}: Props) => {
       </Container>
       <AddContainer>
         <Pressable disabled={addCrypto.length < 1} onPress={onAdd}>
-          <AddText disabled={addCrypto.length < 1}>Add</AddText>
+          <AddText disabled={addCrypto.length < 1}>
+            {cryptosState.crypto.loading ? 'Loading' : 'Add '}
+          </AddText>
         </Pressable>
       </AddContainer>
     </SafeAreaView>
