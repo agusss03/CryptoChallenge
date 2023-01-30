@@ -1,5 +1,5 @@
 import {View, Text, Image} from 'react-native';
-import theme from './src/config/theme';
+import theme from '../../config/theme';
 import styled from 'styled-components';
 
 export const Container = styled(View)`
@@ -8,11 +8,11 @@ export const Container = styled(View)`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  shadow-color: ${theme.colors.white};
+  shadow-color: ${theme.colors.black};
 `;
 
 export const Title = styled(Text)`
-  color: ${theme.colors.black};
+  color: ${theme.colors.white};
   font-size: 20px;
   font-weight: bold;
 `;
