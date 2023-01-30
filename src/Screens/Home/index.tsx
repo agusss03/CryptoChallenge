@@ -3,14 +3,16 @@ import React from 'react';
 import {SafeAreaView, View, FlatList, TouchableOpacity} from 'react-native';
 import Crypto from '../../components/Crypto';
 import {Container, Title, ImageApp, Space, BTNAddCrypto} from './styles';
-import {useSelector} from 'react-redux';
+import {useAppSelector} from '../../store';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {RootStackParamList} from '../../types/navigation';
 
 interface Props {
-  navigation: any;
+  navigation: StackNavigationProp<RootStackParamList>;
 }
 
 const Home = ({navigation}: Props) => {
-  const cryptosState: any = useSelector(state => state);
+  const cryptosState = useAppSelector(state => state);
 
   return (
     <>

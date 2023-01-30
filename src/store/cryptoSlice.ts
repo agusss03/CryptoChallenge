@@ -1,7 +1,8 @@
 import {createSlice} from '@reduxjs/toolkit';
 import {fetchCrypto} from './actions/cryptos';
+import {initialStateType} from './types';
 
-const initialState: any = {
+const initialState: initialStateType = {
   cryptos: [],
   error: null,
   loading: false,
@@ -18,11 +19,18 @@ export const cryptoSlice = createSlice({
   extraReducers: builder => {
     builder.addCase(fetchCrypto.fulfilled, (state, {payload}) => {
       if (payload.data) {
-        state.cryptos.push(payload.data);
+        if (
+          state.cryptos.filter(cryptos => cryptos.id === payload.data.id)
+            .length > 0
+        ) {
+          state.error = 'This Cryptocurrency was already added';
+        } else {
+          state.cryptos.push(payload.data);
+        }
       } else {
         state.error = 'Error on Fetch';
       }
-      state.loadign = false;
+      state.loading = false;
     });
     builder.addCase(fetchCrypto.rejected, state => {
       state.loading = false;

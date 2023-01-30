@@ -12,17 +12,11 @@ const Stack = createNativeStackNavigator();
 const App = () => (
   <Provider store={store}>
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen
-          name="Home"
-          component={Home}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="AddCryptos"
-          component={AddCryptos}
-          options={{headerShown: false}}
-        />
+      <Stack.Navigator
+        screenOptions={{headerShown: false}}
+        initialRouteName="Home">
+        <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="AddCryptos" component={AddCryptos} />
       </Stack.Navigator>
     </NavigationContainer>
   </Provider>

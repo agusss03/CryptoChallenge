@@ -8,26 +8,30 @@ import {
   BtnView,
   Container,
   CryptoName,
+  BtnAdd,
 } from './styles';
 import {fetchCrypto} from '../../store/actions/cryptos';
-import {AppDispatch} from '../../store/index';
-import {useDispatch, useSelector} from 'react-redux';
+import {AppDispatch, useAppSelector} from '../../store/index';
+import {useDispatch} from 'react-redux';
 import {clearError} from '../../store/cryptoSlice';
+import theme from '../../config/theme';
+import type {StackNavigationProp} from '@react-navigation/stack';
+import {RootStackParamList} from '../../types/navigation';
 
 interface Props {
-  navigation: any;
+  navigation: StackNavigationProp<RootStackParamList>;
 }
 
 const AddCryptos = ({navigation}: Props) => {
   const [addCrypto, setAddCrypto] = useState('');
   const [isFocused, setIsFocused] = useState(false);
   const dispatch = useDispatch<AppDispatch>();
-  const cryptosState: any = useSelector(state => state);
-
+  const cryptosState = useAppSelector(state => state);
   const onAdd = async () => {
     await dispatch(fetchCrypto(addCrypto));
     navigation.goBack();
   };
+
   useEffect(() => {
     if (cryptosState.crypto.error !== null) {
       Alert.alert('Error', cryptosState.crypto.error, [
@@ -37,7 +41,7 @@ const AddCryptos = ({navigation}: Props) => {
         },
       ]);
     }
-  }, [cryptosState.crypto.error, dispatch]);
+  }, [cryptosState.crypto, dispatch]);
 
   return (
     <SafeAreaView>
@@ -50,7 +54,7 @@ const AddCryptos = ({navigation}: Props) => {
         <AddCrypto>Add a Cryptocurrency</AddCrypto>
         <CryptoName
           placeholder="Use a name or ticker symbol..."
-          placeholderTextColor={'#A4A4A4'}
+          placeholderTextColor={theme.colors.darkerGrey}
           value={addCrypto}
           onChangeText={setAddCrypto}
           onFocus={() => setIsFocused(true)}
@@ -58,11 +62,11 @@ const AddCryptos = ({navigation}: Props) => {
         />
       </Container>
       <AddContainer>
-        <Pressable disabled={addCrypto.length < 1} onPress={onAdd}>
+        <BtnAdd disabled={addCrypto.length < 1} onPress={onAdd}>
           <AddText disabled={addCrypto.length < 1}>
             {cryptosState.crypto.loading ? 'Loading' : 'Add '}
           </AddText>
-        </Pressable>
+        </BtnAdd>
       </AddContainer>
     </SafeAreaView>
   );
