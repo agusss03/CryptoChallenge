@@ -18,16 +18,13 @@ export const cryptoSlice = createSlice({
     }),
     deleteCrypto: (state, {payload}) => ({
       ...state,
-      cryptos: state.cryptos.filter(cryptos => cryptos.id !== payload.id),
+      cryptos: state.cryptos.filter(({id}) => id !== payload.id),
     }),
   },
   extraReducers: builder => {
     builder.addCase(fetchCrypto.fulfilled, (state, {payload}) => {
       if (payload.data) {
-        if (
-          state.cryptos.filter(cryptos => cryptos.id === payload.data.id)
-            .length > 0
-        ) {
+        if (state.cryptos.filter(({id}) => id === payload.data.id).length > 0) {
           state.error = 'This Cryptocurrency was already added';
         } else {
           state.cryptos.push(payload.data);
@@ -45,7 +42,7 @@ export const cryptoSlice = createSlice({
       state.loading = true;
     });
     builder.addCase(updateFetchCrypto.fulfilled, (state, {payload}) => {
-      if (payload.findIndex(cryptos => cryptos.id === undefined) === -1) {
+      if (payload.findIndex(({id}) => id === undefined) === -1) {
         state.cryptos = payload;
       }
     });
