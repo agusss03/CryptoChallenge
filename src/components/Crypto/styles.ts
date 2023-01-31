@@ -1,8 +1,8 @@
-import {View, Text, Image} from 'react-native';
+import {View, Text, Image, TouchableOpacity} from 'react-native';
 import theme from '../../config/theme';
 import styled from 'styled-components';
 
-export const Wrapper = styled(View)`
+export const Wrapper = styled(TouchableOpacity)`
   padding-horizontal: 16px;
   margin-top: 15px;
   flex-direction: row;

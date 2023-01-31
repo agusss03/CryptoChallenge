@@ -27,6 +27,7 @@ const AddCryptos = ({navigation}: Props) => {
   const [isFocused, setIsFocused] = useState(false);
   const dispatch = useDispatch<AppDispatch>();
   const cryptosState = useAppSelector(state => state);
+
   const onAdd = async () => {
     await dispatch(fetchCrypto(addCrypto));
     navigation.goBack();
