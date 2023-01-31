@@ -1,5 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit';
-import {fetchCrypto} from './actions/cryptos';
+import {fetchCrypto, updateFetchCrypto} from './actions/cryptos';
 import {initialStateType} from './types';
 
 const initialState: initialStateType = {
@@ -12,9 +12,14 @@ export const cryptoSlice = createSlice({
   name: 'crypto',
   initialState,
   reducers: {
-    clearError: state => {
-      state.error = null;
-    },
+    clearError: state => ({
+      ...state,
+      error: null,
+    }),
+    deleteCrypto: (state, {payload}) => ({
+      ...state,
+      cryptos: state.cryptos.filter(cryptos => cryptos.id !== payload.id),
+    }),
   },
   extraReducers: builder => {
     builder.addCase(fetchCrypto.fulfilled, (state, {payload}) => {
@@ -39,8 +44,13 @@ export const cryptoSlice = createSlice({
     builder.addCase(fetchCrypto.pending, state => {
       state.loading = true;
     });
+    builder.addCase(updateFetchCrypto.fulfilled, (state, {payload}) => {
+      if (payload.findIndex(cryptos => cryptos.id === undefined) === -1) {
+        state.cryptos = payload;
+      }
+    });
   },
 });
 
-export const {clearError} = cryptoSlice.actions;
+export const {clearError, deleteCrypto} = cryptoSlice.actions;
 export default cryptoSlice.reducer;

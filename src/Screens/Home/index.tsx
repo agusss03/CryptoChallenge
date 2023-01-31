@@ -1,11 +1,13 @@
 import 'react-native-gesture-handler';
-import React from 'react';
+import React, {useEffect} from 'react';
 import {SafeAreaView, View, FlatList, TouchableOpacity} from 'react-native';
 import Crypto from '../../components/Crypto';
 import {Container, Title, ImageApp, Space, BTNAddCrypto} from './styles';
-import {useAppSelector} from '../../store';
+import {AppDispatch, useAppSelector} from '../../store';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootStackParamList} from '../../types/navigation';
+import {useDispatch} from 'react-redux';
+import {updateFetchCrypto} from '../../store/actions/cryptos';
 
 interface Props {
   navigation: StackNavigationProp<RootStackParamList>;
@@ -13,6 +15,15 @@ interface Props {
 
 const Home = ({navigation}: Props) => {
   const cryptosState = useAppSelector(state => state);
+  const dispatch = useDispatch<AppDispatch>();
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      dispatch(updateFetchCrypto(cryptosState?.crypto?.cryptos));
+    }, 8000);
+
+    return () => clearInterval(interval);
+  }, [cryptosState.crypto.cryptos]);
 
   return (
     <>
