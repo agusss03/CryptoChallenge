@@ -6,7 +6,7 @@ export const fetchCrypto = createAsyncThunk(
   'crypto/fetchCrypto',
   async (code: string) => {
     try {
-      const response: any = await fetch(`${API_URL}/${code}/metrics`);
+      const response = await fetch(`${API_URL}/${code}/metrics`);
       const data = await response.json();
       return data;
     } catch (error) {
@@ -23,9 +23,7 @@ export const updateFetchCrypto = createAsyncThunk(
     const updatedData = [];
 
     for (let i = 0; i < crypto.length; i++) {
-      const response: any = await fetch(
-        `${API_URL}/${crypto[i].symbol}/metrics`,
-      );
+      const response = await fetch(`${API_URL}/${crypto[i].symbol}/metrics`);
       const data = await response.json();
 
       updatedData.push(data.data);
